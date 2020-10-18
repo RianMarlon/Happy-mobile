@@ -1,8 +1,9 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text } from 'react-native';
 import MapView, { Marker, Callout, PROVIDER_GOOGLE } from 'react-native-maps';
 import { Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import { RectButton } from 'react-native-gesture-handler';
 
 import mapMarker from '../../assets/images/map-marker.png';
 
@@ -60,12 +61,12 @@ function OrphanagesMap() {
             2 orfanatos encontrados
           </Text>
 
-          <TouchableOpacity 
+          <RectButton 
             style={styles.createOrphanageButton}
             onPress={handleNavigateToCreateOrphanage}
           >
             <Feather name="plus" size={20} color="#FFF" />
-          </TouchableOpacity>
+          </RectButton>
       </View>
     </View>
   );
