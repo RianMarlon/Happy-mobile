@@ -2,12 +2,19 @@ import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import MapView, { Marker, Callout, PROVIDER_GOOGLE } from 'react-native-maps';
 import { Feather } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 import mapMarker from '../../assets/images/map-marker.png';
 
 import styles from './styles';
 
 function OrphanagesMap() {
+  const { navigate } = useNavigation();
+
+  function handleNavigateToOrphanageDetails() {
+    navigate('OrphanageDetails');
+  }
+
   return (
     <View style={styles.container}>
       <MapView 
@@ -31,7 +38,10 @@ function OrphanagesMap() {
             y: 0.8,
           }}
         >
-          <Callout tooltip={true} onPress={() => []}>
+          <Callout 
+            tooltip={true} 
+            onPress={handleNavigateToOrphanageDetails}
+          >
             <View style={styles.calloutContainer}>
               <Text style={styles.calloutText}>
                 Lar das meninas
@@ -46,7 +56,7 @@ function OrphanagesMap() {
             2 orfanatos encontrados
           </Text>
 
-          <TouchableOpacity style={styles.createOrphanageButton} onPress={() => []}>
+          <TouchableOpacity style={styles.createOrphanageButton}>
             <Feather name="plus" size={20} color="#FFF" />
           </TouchableOpacity>
       </View>
