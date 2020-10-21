@@ -1,14 +1,14 @@
 {
   "expo": {
-    "name": "mobile",
+    "name": "Happy",
     "slug": "mobile",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "resizeMode": "cover",
+      "backgroundColor": "#15C3D6"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -17,10 +17,30 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.rian.happy",
+      "buildNumber": "1.0.0"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/favicon.png",
+      "backgroundColor": "#15C3D6",
+      "build": {
+        "babel": {
+          "include": ["static-container"]
+        }
+      }
+    },
+    "android": {
+      "package": "com.rian.happy",
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/icon.png",
+        "backgroundColor": "#FFFFFF"
+      }
+    },
+    "androidStatusBar": {
+      "barStyle": "light-content",
+      "backgroundColor": "#15C3D6"
     }
   }
 }
