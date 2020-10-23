@@ -28,7 +28,6 @@ function Routes() {
 
       else {
         setIsFirstLaunch(false);
-        await AsyncStorage.removeItem('@happy:alreadyLaunched');
       }
     })();
   }, []);
