@@ -18,17 +18,19 @@ function Routes() {
   const [isFirstLaunch, setIsFirstLaunch] = useState<Boolean | null>(null);
 
   useEffect(() => {
-    AsyncStorage.getItem('@happy:alreadyLaunched')
-      .then((response) => {
-        if (response === null) {
-          AsyncStorage.setItem('@happy:alreadyLaunched', 'true');
-          setIsFirstLaunch(true);
-        }
+    (async () => {
+      const response = await AsyncStorage.getItem('@happy:alreadyLaunched');
 
-        else {
-          setIsFirstLaunch(false);
-        }
-      });
+      if (response === null) {
+        setIsFirstLaunch(true);
+        await AsyncStorage.setItem('@happy:alreadyLaunched', 'true');
+      }
+
+      else {
+        setIsFirstLaunch(false);
+        await AsyncStorage.removeItem('@happy:alreadyLaunched');
+      }
+    })();
   }, []);
 
   if (isFirstLaunch === null) {

@@ -6,11 +6,11 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'space-between',
-    minHeight: 700,
+    minHeight: 720,
   },
   
   imageOnboarding: {
-    marginTop: 40,
+    marginTop: 50,
     paddingBottom: 0,
   },
 
