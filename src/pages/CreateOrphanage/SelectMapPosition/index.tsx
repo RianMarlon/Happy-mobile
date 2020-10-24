@@ -1,18 +1,30 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text } from 'react-native';
 
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { RectButton } from 'react-native-gesture-handler';
 import MapView, { MapEvent, Marker } from 'react-native-maps';
+import * as Location from 'expo-location';
 
 import mapMarkerImg from '../../../assets/images/map-marker.png';
 
 import styles from './styles';
 
+interface OrphanageMapRouteParams {
+  myLocation: {
+    latitude: number;
+    longitude: number;
+  }
+}
+
 function SelectMapPosition() {
 
-  const { navigate } = useNavigation();
   const [position, setPosition] = useState({ latitude: 0, longitude: 0 });
+
+  const { navigate } = useNavigation();
+
+  const route = useRoute();
+  const { myLocation } = route.params as OrphanageMapRouteParams
 
   function handleNextStep() {
     navigate('OrphanageData', { position });
@@ -25,9 +37,9 @@ function SelectMapPosition() {
   return (
     <View style={styles.container}>
       <MapView 
-        initialRegion={{
-          latitude: -5.1069647, 
-          longitude: -38.3761372,
+        region={{
+          latitude: myLocation.latitude, 
+          longitude: myLocation.longitude,
           latitudeDelta: 0.008,
           longitudeDelta: 0.008,
         }}

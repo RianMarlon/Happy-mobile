@@ -30,7 +30,7 @@ function OrphanagesMap() {
     latitude: -5.1069647,
     longitude: -38.3761372
   });
-  
+
   const [orphanages, setOrphanages] = useState<Orphanage[]>([]);
 
   const { navigate } = useNavigation();
@@ -68,7 +68,7 @@ function OrphanagesMap() {
   }
 
   function handleNavigateToCreateOrphanage() {
-    navigate('SelectMapPosition');
+    navigate('SelectMapPosition', { myLocation });
   }
 
   return (
