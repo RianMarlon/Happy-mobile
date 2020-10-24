@@ -36,7 +36,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "permissions": ["ACCESS_COARSE_LOCATION", "ACCESS_FINE_LOCATION"]
     },
     "androidStatusBar": {
       "barStyle": "light-content",
