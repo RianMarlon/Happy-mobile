@@ -4,6 +4,7 @@ import MapView, { Marker, Callout, PROVIDER_GOOGLE } from 'react-native-maps';
 import { Feather } from '@expo/vector-icons';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { RectButton } from 'react-native-gesture-handler';
+import * as Location from 'expo-location';
 
 import api from '../../services/api';
 
@@ -18,17 +19,49 @@ interface Orphanage {
   longitude: number;
 }
 
+interface MyLocation {
+  latitude: number;
+  longitude: number;
+}
+
 function OrphanagesMap() {
 
+  const [myLocation, setMyLocation] = useState<MyLocation>({
+    latitude: -5.1069647,
+    longitude: -38.3761372
+  });
+  
   const [orphanages, setOrphanages] = useState<Orphanage[]>([]);
+
   const { navigate } = useNavigation();
 
-  useFocusEffect(() => {
-    api.get('/orphanages')
-      .then((response) => {
-        setOrphanages(response.data);
+  useFocusEffect(
+    React.useCallback(() => {
+      api.get('/orphanages')
+        .then((response) => {
+          setOrphanages(response.data);  
+        });
+    }, [])
+  );
+
+  useEffect(() => {
+    (async () => {
+      const { status } = await Location.requestPermissionsAsync();
+
+      if (status !== 'granted') {
+        return;
+      }
+
+      const { coords } = await Location.getCurrentPositionAsync({
+        enabledHighAccuracy: true
+      } as any);
+      
+      setMyLocation({
+        latitude: coords.latitude,
+        longitude: coords.longitude
       });
-  });
+    })();
+  }, [])
 
   function handleNavigateToOrphanageDetails(id: number) {
     navigate('OrphanageDetails', { id });
@@ -43,9 +76,9 @@ function OrphanagesMap() {
       <MapView 
         style={styles.map}
         provider={PROVIDER_GOOGLE}
-        initialRegion={{
-          latitude: -5.1069647,
-          longitude: -38.3761372,
+        region={{
+          latitude: myLocation.latitude,
+          longitude: myLocation.longitude,
           latitudeDelta: 0.008,
           longitudeDelta: 0.008,
         }}
