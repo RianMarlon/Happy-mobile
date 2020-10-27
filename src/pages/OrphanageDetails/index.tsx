@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Image, View, ScrollView, Text, Linking } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
-import { Feather } from '@expo/vector-icons';
+import { Feather, FontAwesome } from '@expo/vector-icons';
 import { useRoute } from '@react-navigation/native';
+import { RectButton, TouchableOpacity } from 'react-native-gesture-handler';
 
 import api from '../../services/api';
 
 import mapMarkerImg from '../../assets/images/map-marker.png';
 
 import styles from './styles';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
 interface OrphanageDetailsRouteParams {
   id: number;
@@ -20,8 +20,10 @@ interface Orphanage {
   latitude: number;
   longitude: number;
   about: string;
+  whatsapp: string;
   instructions: string;
-  opening_hours: string;
+  open_from: string;
+  open_until: string;
   open_on_weekends: boolean;
   images: Array<{
     id: number;
@@ -55,6 +57,10 @@ function OrphanageDetails() {
 
   function handleOpenGoogleMapsRoutes() {
     Linking.openURL( `https://www.google.com/maps/dir/?api=1&destination=${orphanage?.latitude},${orphanage?.longitude}`);
+  }
+
+  function handleLinkToWhatsapp() {
+    Linking.openURL(`whatsapp://send?phone=${orphanage?.whatsapp}`);
   }
 
   return (
@@ -97,7 +103,6 @@ function OrphanageDetails() {
           </MapView>
 
           <TouchableOpacity onPress={handleOpenGoogleMapsRoutes} style={styles.routesContainer}>
-         
             <Text style={styles.routesText}>Ver rotas no Google Maps</Text>
           </TouchableOpacity>
         </View>
@@ -110,7 +115,13 @@ function OrphanageDetails() {
         <View style={styles.scheduleContainer}>
           <View style={[styles.scheduleItem, styles.scheduleItemBlue]}>
             <Feather name="clock" size={40} color="#2AB5D1" />
-            <Text style={[styles.scheduleText, styles.scheduleTextBlue]}>Segunda à Sexta {orphanage.opening_hours}</Text>
+            <Text style={[styles.scheduleText, styles.scheduleTextBlue]}>
+              Segunda à 
+              {' '}
+              { orphanage.open_on_weekends ? 'domingo' : 'sexta' }
+              {' '}
+              das {orphanage.open_from} até as {orphanage.open_until}
+            </Text>
           </View>
           {orphanage.open_on_weekends ? (
             <View style={[styles.scheduleItem, styles.scheduleItemGreen]}>
@@ -125,10 +136,10 @@ function OrphanageDetails() {
           )}
         </View>
 
-        {/* <RectButton style={styles.contactButton} onPress={() => {}}>
+        <RectButton style={styles.contactButton} onPress={handleLinkToWhatsapp}>
           <FontAwesome name="whatsapp" size={24} color="#FFF" />
           <Text style={styles.contactButtonText}>Entrar em contato</Text>
-        </RectButton> */}
+        </RectButton>
       </View>
     </ScrollView>
   );
