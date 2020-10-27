@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
     color: '#8FA7B3',
     fontFamily: 'Nunito_600SemiBold',
     marginBottom: 8,
+    fontSize: 14,
   },
 
   comment: {
@@ -27,27 +28,52 @@ const styles = StyleSheet.create({
   },
 
   input: {
-    backgroundColor: '#FFF',
-    borderWidth: 1.4,
-    borderColor: '#D3E2E6',
-    borderRadius: 20,
-    height: 56,
+    marginBottom: 16,
     paddingVertical: 18,
     paddingHorizontal: 24,
-    marginBottom: 16,
+    height: 56,
+    backgroundColor: '#FFF',
+    borderWidth: 1.5,
+    borderRadius: 20,
+    borderColor: '#A1E9C5',
     textAlignVertical: 'top',
   },
 
-  uploadedImagesContainer: {
+  uploadedImageContainer: {
+    flex: 1,
     flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 20,
+    marginRight: 8,
+    padding: 6,
+    paddingRight: 20,
+    height: 72,
+    borderWidth: 1,
+    borderRadius: 20,
+    borderColor: '#A1E9C5',
+    borderRightColor: '#FCF0F4',
+  },
+
+  uploadedImageInfoContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 
   uploadedImage: {
-    width: 64,
-    height: 64,
+    width: 60,
+    height: 60,
     borderRadius: 20,
-    marginBottom: 32,
-    marginRight: 8,
+  },
+
+  uploadedImageName: {
+    marginLeft: 20,
+    color: '#37C77F',
+    fontFamily: 'Nunito_600SemiBold',
+    fontSize: 14,
+    lineHeight: 24,
+    textAlign: 'center',
   },
 
   imagesInput: {
