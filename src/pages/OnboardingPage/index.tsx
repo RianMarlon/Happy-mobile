@@ -5,8 +5,8 @@ import { RectButton, ScrollView } from 'react-native-gesture-handler';
 import { Feather } from '@expo/vector-icons';
 import Onboarding, { DoneButtonProps, DotProps, NextButtonProps } from 'react-native-onboarding-swiper';
 
-import kidsHappy from '../../assets/images/kids-happy.png';
-import worldHappy from '../../assets/images/world-happy.png';
+import kidsHappyImg from '../../assets/images/kids-happy.png';
+import worldHappyImg from '../../assets/images/world-happy.png';
 
 import styles from './styles';
 
@@ -64,7 +64,7 @@ function OnboardingPage() {
             {
               backgroundColor: "#CEDEE5",
               image: (
-                <Image source={worldHappy} width={257} height={279} />
+                <Image source={worldHappyImg} width={257} height={279} />
               ),
               title: (
                 <Text style={styles.titleWorldHappy}>
@@ -80,7 +80,7 @@ function OnboardingPage() {
             {
               backgroundColor: "#CEDEE5",
               image: (
-                <Image source={kidsHappy} width={295} height={427} />
+                <Image source={kidsHappyImg} width={295} height={427} />
               ),
               title: (
                 <Text style={styles.titleKidsHappy}>

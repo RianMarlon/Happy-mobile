@@ -8,7 +8,7 @@ import * as Location from 'expo-location';
 
 import api from '../../services/api';
 
-import mapMarker from '../../assets/images/map-marker.png';
+import mapMarkerImg from '../../assets/images/map-marker.png';
 
 import styles from './styles';
 
@@ -87,7 +87,7 @@ function OrphanagesMap() {
           return (
             <Marker 
               key={orphanage.id}
-              icon={mapMarker}
+              icon={mapMarkerImg}
               coordinate={{
                 latitude: orphanage.latitude,
                 longitude: orphanage.longitude,

@@ -38,10 +38,6 @@
         "backgroundColor": "#FFFFFF"
       },
       "permissions": ["ACCESS_COARSE_LOCATION", "ACCESS_FINE_LOCATION"]
-    },
-    "androidStatusBar": {
-      "barStyle": "light-content",
-      "backgroundColor": "#15C3D6"
     }
   }
 }

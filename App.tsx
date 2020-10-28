@@ -1,4 +1,3 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useFonts } from 'expo-font';
@@ -18,7 +17,6 @@ export default function App() {
   if (!fontsLoaded) {
     return null;
   }
-
 
   return (
     <View style={styles.container}>
