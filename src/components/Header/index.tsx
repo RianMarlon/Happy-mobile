@@ -14,8 +14,12 @@ interface HeaderProps {
 function Header({ title, showCancel = true }: HeaderProps) {
   const { navigate, goBack } = useNavigation();
 
-  function handleGoBackToAppHomePage() {
-    navigate('OrphanagesMap');
+  function handleCancel() {
+    navigate('Cancel', {
+      title: 'Cancelar cadastro',
+      description: 'Tem certeza que quer cancelar esse cadastro?',
+      routeButtonCancel: 'OrphanagesMap'
+    });
   }
 
   return (
@@ -32,7 +36,7 @@ function Header({ title, showCancel = true }: HeaderProps) {
             name="x" 
             size={24} 
             color="#FF669D" 
-            onPress={handleGoBackToAppHomePage} 
+            onPress={handleCancel} 
           />
         </BorderlessButton>
       ) : (
