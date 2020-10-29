@@ -152,8 +152,12 @@ function OrphanageData() {
 
     api.post('/orphanages', data)
       .then(() => {
-        alert('Cadastro realizado com sucesso!');
-        navigate('OrphanagesMap');
+        navigate('Success', {
+          title: 'Ebaaa!',
+          description: 'O cadastro deu certo e foi enviado ao administrador para ser aprovado. Agora é só esperar :)',
+          textButton: 'Ok',
+          routeButton: 'OrphanagesMap',
+        });
       });
   }
 

@@ -35,7 +35,7 @@ function SelectMapPosition() {
   return (
     <View style={styles.container}>
       <MapView 
-        region={{
+        initialRegion={{
           latitude: myLocation.latitude, 
           longitude: myLocation.longitude,
           latitudeDelta: 0.008,
