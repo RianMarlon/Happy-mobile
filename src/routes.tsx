@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
-
+import { AsyncStorage } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
+import Header from './components/Header';
 import OrphanagesMap from './pages/OrphanagesMap';
 import OrphanageDetails from './pages/OrphanageDetails';
 import SelectMapPosition from './pages/CreateOrphanage/SelectMapPosition';
 import OrphanageData from './pages/CreateOrphanage/OrphanageData';
-import Header from './components/Header';
 import OnboardingPage from './pages/OnboardingPage';
-import { AsyncStorage } from 'react-native';
+import Success from './pages/Success';
+import Cancel from './pages/Cancel';
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -80,6 +81,14 @@ function Routes() {
               headerShown: true,
               header: () => <Header title="Informe os dados" />
             }}
+          />
+          <Screen 
+            name="Success" 
+            component={Success}
+          />
+          <Screen 
+            name="Cancel" 
+            component={Cancel}
           />
         </Navigator>
       </NavigationContainer>

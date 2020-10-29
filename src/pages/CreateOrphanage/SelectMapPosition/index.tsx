@@ -22,7 +22,7 @@ function SelectMapPosition() {
   const { navigate } = useNavigation();
 
   const route = useRoute();
-  const { myLocation } = route.params as OrphanageMapRouteParams
+  const { myLocation } = route.params as OrphanageMapRouteParams;
 
   function handleNextStep() {
     navigate('OrphanageData', { position });
