@@ -6,6 +6,36 @@ const styles = StyleSheet.create({
     position: 'relative',
   },
 
+  buttonTouch: {
+    height: '100%',
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: '12%',
+    backgroundColor: 'rgba(21, 182, 214, 0.7)',
+  },
+
+  buttonTouchContext: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  touchImg: {
+    width: 120,
+    height: 120,
+    marginBottom: 10,
+  },
+
+  buttonTouchText: {
+    color: '#FFFFFF',
+    fontFamily: 'Nunito_800ExtraBold',
+    justifyContent: 'center',
+    alignItems: 'center',
+    textAlign: 'center',
+    fontSize: 24,
+    lineHeight: 34,
+  },
+
   mapStyle: {
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height,
