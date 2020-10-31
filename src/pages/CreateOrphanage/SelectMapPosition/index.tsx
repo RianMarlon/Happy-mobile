@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, Text, Image, Modal, TouchableHighlight } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, Image, Modal, TouchableHighlight, AsyncStorage } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { RectButton } from 'react-native-gesture-handler';
 import MapView, { MapEvent, Marker } from 'react-native-maps';
@@ -19,14 +19,29 @@ interface OrphanageMapRouteParams {
 function SelectMapPosition() {
 
   const [position, setPosition] = useState({ latitude: 1000, longitude: 1000 });
-  const [touchInstructionsVisible, setTouchInstructionsVisible] = useState(true);
+  const [touchInstructionsVisible, setTouchInstructionsVisible] = useState(false);
 
   const { navigate } = useNavigation();
 
   const route = useRoute();
   const { myLocation } = route.params as OrphanageMapRouteParams;
 
-  function handleTouchInstuctions() {
+  useEffect(() => {
+    (async () => {
+      const response = await AsyncStorage.getItem('@happy:instructionSelectMapPosition');  
+
+      if (response === null) {
+        setTouchInstructionsVisible(true);
+      }
+
+      else {
+        setTouchInstructionsVisible(false);
+      }
+    })();
+  }, []);
+
+  async function handleTouchInstuctions() {
+    await AsyncStorage.setItem('@happy:instructionSelectMapPosition', 'true');
     setTouchInstructionsVisible(false);
   }
 
