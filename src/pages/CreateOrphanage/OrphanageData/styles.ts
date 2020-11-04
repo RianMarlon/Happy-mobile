@@ -39,20 +39,27 @@ const styles = StyleSheet.create({
     textAlignVertical: 'top',
   },
 
-  uploadedImageContainer: {
+  uploadedImageContainerBorder: {
     flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: 'column',
+    justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 20,
     marginRight: 8,
+    height: 72,
+    padding: 1,
+    borderRadius: 20,
+  },
+
+  uploadedImageContainer: {
+    flex: 1,
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    borderRadius: 20,
     padding: 6,
     paddingRight: 20,
-    height: 72,
-    borderWidth: 1,
-    borderRadius: 20,
-    borderColor: '#A1E9C5',
-    borderRightColor: '#FCF0F4',
   },
 
   uploadedImageInfoContainer: {
