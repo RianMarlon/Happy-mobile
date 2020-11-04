@@ -193,25 +193,32 @@ function OrphanageData() {
 
       {images.map((image, index) => {
         return (
-          <LinearGradient 
+          <LinearGradient
             key={image.uri} 
-            style={styles.uploadedImageContainer}
-            colors={['#EDFFF6', '#FCF0F4']}
-            start={[0.7, 0]}
+            style={styles.uploadedImageContainerBorder}
+            colors={['#A1E9C5', '#FFC2D8']}
+            start={[0.6, 0.6]}
             end={[1, 1]}
           >
-            <View style={styles.uploadedImageInfoContainer}>
-              <Image
-                style={styles.uploadedImage}
-                source={{
-                  uri: image.uri
-                }}
-              />
-              <Text style={styles.uploadedImageName}>{image.name}</Text>
-            </View>
-            <BorderlessButton onPress={() => handleRemoveImage(index)}>
-              <Feather name="x" size={24} color="#FF669D" />
-            </BorderlessButton>
+            <LinearGradient
+              style={styles.uploadedImageContainer}
+              colors={['#EDFFF6', '#FCF0F4']}
+              start={[0.6, 0.6]}
+              end={[1, 1]}
+            >
+              <View style={styles.uploadedImageInfoContainer}>
+                <Image
+                  style={styles.uploadedImage}
+                  source={{
+                    uri: image.uri
+                  }}
+                />
+                <Text style={styles.uploadedImageName}>{image.name}</Text>
+              </View>
+              <BorderlessButton onPress={() => handleRemoveImage(index)}>
+                <Feather name="x" size={24} color="#FF669D" />
+              </BorderlessButton>
+            </LinearGradient>
           </LinearGradient>
         );
       })}
