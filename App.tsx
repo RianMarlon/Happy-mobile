@@ -3,6 +3,8 @@ import { StyleSheet, View } from 'react-native';
 import { useFonts } from 'expo-font';
 import { Nunito_400Regular, Nunito_600SemiBold, Nunito_700Bold, Nunito_800ExtraBold } from '@expo-google-fonts/nunito';
 
+import { RootSiblingParent } from 'react-native-root-siblings';
+
 import Routes from './src/routes';
 
 export default function App() {
@@ -19,9 +21,11 @@ export default function App() {
   }
 
   return (
-    <View style={styles.container}>
-      <Routes />
-    </View>
+    <RootSiblingParent>
+      <View style={styles.container}>
+        <Routes />
+      </View>
+    </RootSiblingParent>
   );
 }
 
