@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from 'react';
+import { useState } from 'react';
 
 function useForm(initialState: any) {
   const [form, setForm] = useState(initialState);
@@ -13,10 +13,6 @@ function useForm(initialState: any) {
 
     setForm({...newForm});
     setErrors({...newErrors});
-  }
-
-  function updateForm(obj: any) {
-    setForm({ ...obj });
   }
 
   function validateFields() {
@@ -37,10 +33,22 @@ function useForm(initialState: any) {
     return Object.values(form).some(hasFieldEmpty);
   }
 
+  function resetFields(obj: any) {
+    const newErrors: any = {};
+    
+    Object.entries(form).forEach(([field, value]) => {
+      newErrors[field] = '';
+    });
+    
+    setForm({
+      ...newErrors
+    });
+  }
+
   return [
-    form, updateField, 
-    updateForm, validateFields, 
-    errors, hasOneFieldEmpty,
+    form, errors,
+    updateField, validateFields,
+    hasOneFieldEmpty, resetFields,
   ]
 }
 
