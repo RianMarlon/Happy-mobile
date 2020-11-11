@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
   input: {
     backgroundColor: '#FFF',
     borderWidth: 1,
-    borderColor: '#A1E9C5',
+    borderColor: '#D3E2E5',
     borderRadius: 20,
     height: 56,
     paddingVertical: 18,
@@ -37,8 +37,16 @@ const styles = StyleSheet.create({
     textAlignVertical: 'top',
   },
 
+  noEmpty: {
+    borderColor: '#A1E9C5',
+  },
+
+  inputError: {
+    borderColor: '#FF669D',
+  },
+
   error: {
-    color: '#E83F5B',
+    color: '#FF669D',
   },
 });
 
