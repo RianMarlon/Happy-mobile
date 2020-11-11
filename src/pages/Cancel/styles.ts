@@ -11,9 +11,9 @@ const styles = StyleSheet.create({
   },
 
   cancelIconContainer: {
-    marginBottom: 32,
     justifyContent: 'center',
     alignItems: 'center',
+    marginBottom: 32,
     width: 64,
     height: 64,
     backgroundColor: '#FFFFFF',

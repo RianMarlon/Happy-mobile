@@ -2,10 +2,10 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 30,
     flex: 1,
     alignItems: 'center',
     justifyContent: 'space-between',
+    paddingHorizontal: 30,
     minHeight: 720,
   },
   
@@ -25,52 +25,52 @@ const styles = StyleSheet.create({
 
   descriptionWorldHappy: {
     marginTop: -20,
+    paddingBottom: 80,
+    color: '#5C8599',
     fontFamily: 'Nunito_600SemiBold',
     fontSize: 20,
     lineHeight: 30,
-    color: '#5C8599',
     textAlign: 'left',
-    paddingBottom: 80,
   },
 
   titleKidsHappy: {
     marginBottom: 20,
+    color: '#0089A5',
     fontFamily: 'Nunito_800ExtraBold',
     fontSize: 30,
     lineHeight: 36,
-    color: '#0089A5',
     textAlign: 'right',
   },
 
   buttonNext: {
+    alignItems: 'center',
+    justifyContent: 'center',
     marginRight: 30,
     marginBottom: 70,
     width: 56,
-    borderRadius: 20,
     height: 56,
+    borderRadius: 20,
     backgroundColor: '#D1EDF2',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 
   squareNoSelected: {
+    marginLeft: 2,
+    marginRight: 2,
+    marginBottom: 70,
     width: 8,
     height: 4,
     borderRadius: 4,
     backgroundColor: '#BECFD8',
-    marginLeft: 2,
-    marginRight: 2,
-    marginBottom: 70,
   },
 
   squareSelected: {
+    marginLeft: 2,
+    marginRight: 2,
+    marginBottom: 70,
     width: 16,
     height: 4,
     borderRadius: 4,
     backgroundColor: '#FFD152',
-    marginLeft: 2,
-    marginRight: 2,
-    marginBottom: 70,
   },
 });
 

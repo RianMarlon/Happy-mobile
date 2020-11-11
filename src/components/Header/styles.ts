@@ -2,15 +2,14 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
-    padding: 24,
-    backgroundColor: '#F9FAFC',
-    borderBottomWidth: 1,
-    borderBottomColor: '#DDE3F0',
-    paddingTop: 44,
-
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    padding: 24,
+    paddingTop: 44,
+    backgroundColor: '#F9FAFC',
+    borderBottomWidth: 1,
+    borderBottomColor: '#DDE3F0',
   },
 
   title: {

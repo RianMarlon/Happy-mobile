@@ -26,19 +26,19 @@ const styles = StyleSheet.create({
   },
 
   description: {
-    fontFamily: 'Nunito_600SemiBold',
-    color: '#5c8599',
-    lineHeight: 24,
     marginTop: 16,
+    color: '#5C8599',
+    fontFamily: 'Nunito_600SemiBold',
+    lineHeight: 24,
   },
 
   mapContainer: {
-    borderRadius: 20,
+    marginTop: 40,
     overflow: 'hidden',
+    backgroundColor: '#E6F7FB',
+    borderRadius: 20,
     borderWidth: 1.2,
     borderColor: '#B3DAE2',
-    marginTop: 40,
-    backgroundColor: '#E6F7FB',
   },
 
   mapStyle: {
@@ -47,9 +47,9 @@ const styles = StyleSheet.create({
   },
 
   routesContainer: {
-    padding: 16,
     alignItems: 'center',
     justifyContent: 'center',
+    padding: 16,
   },
 
   routesText: {
@@ -58,21 +58,21 @@ const styles = StyleSheet.create({
   },
 
   separator: {
+    marginVertical: 40,
     height: 0.8,
     width: '100%',
     backgroundColor: '#D3E2E6',
-    marginVertical: 40,
   },
 
   scheduleContainer: {
-    marginTop: 24,
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    marginTop: 24,
   },
 
   scheduleItem: {
-    width: '48%',
     padding: 20,
+    width: '48%',
   },
 
   scheduleItemBlue: {
@@ -116,18 +116,18 @@ const styles = StyleSheet.create({
   },
 
   contactButton: {
-    backgroundColor: '#3CDC8C',
-    borderRadius: 20,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    height: 56,
     marginTop: 40,
+    height: 56,
+    backgroundColor: '#3CDC8C',
+    borderRadius: 20,
   },
 
   contactButtonText: {
-    fontFamily: 'Nunito_800ExtraBold',
     color: '#FFF',
+    fontFamily: 'Nunito_800ExtraBold',
     fontSize: 16,
     marginLeft: 16,
   },
