@@ -1,19 +1,20 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, StyleSheet, TextInputProps } from 'react-native';
 
 import styles from './styles';
 
-interface InputProps extends TextInputProps {
+export interface InputProps extends TextInputProps {
   label: string;
   labelError?: string;
   error?: boolean;
-  required?: boolean;
   comment?: string;
 }
 
 function Input({
-    label, required=false, comment, labelError, error, ...rest
+    label, comment, labelError, error, ...rest
   }: InputProps) {
+
+  const [stylesInput, setStylesInput] = useState([styles.input, rest.style]);
 
   const styleLabel = StyleSheet.create({
     color: {
@@ -21,15 +22,30 @@ function Input({
     }
   });
 
+  useEffect(() => {
+    if (rest.value && rest.value.trim()) {
+      setStylesInput([styles.input, rest.style, styles.noEmpty]);
+    }
+
+    else if (error) {
+      setStylesInput([styles.input, rest.style, styles.inputError]);
+    }
+
+    else {
+      setStylesInput([styles.input, rest.style]);
+    }
+
+  }, [rest.value, error]);
+
   return (
     <View>
       <View style={styles.labelContainer}>
-        <Text style={error && required 
+        <Text style={error
           ? [styles.labelText, styles.error] 
           : [styles.labelText, styleLabel.color] 
         }>
           {
-            error && required ? labelError : label
+            error ? labelError : label
           }
         </Text>
         <Text style={styles.comment}>
@@ -38,7 +54,7 @@ function Input({
       </View>
       <TextInput
         { ...rest }
-        style={[styles.input, rest.style]}
+        style={stylesInput}
       />
     </View>
   );
