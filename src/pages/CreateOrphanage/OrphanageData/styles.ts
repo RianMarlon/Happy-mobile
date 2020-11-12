@@ -5,14 +5,40 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 
-  title: {
-    color: '#5C8599',
-    fontSize: 24,
-    fontFamily: 'Nunito_700Bold',
+  titleContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     marginBottom: 32,
     paddingBottom: 24,
     borderBottomWidth: 0.8,
     borderBottomColor: '#D3E2E6',
+  },
+
+  title: {
+    color: '#5C8599',
+    fontSize: 24,
+    fontFamily: 'Nunito_700Bold',
+  },
+  
+  paginationContainer: {
+    flexDirection: 'row',
+  },
+
+  pageEnabled: {
+    color: '#8FA7B3',
+    fontFamily: 'Nunito_800ExtraBold',
+    fontSize: 12,
+    lineHeight: 22,
+    textAlign: 'right',
+  },
+
+  pageDisabled: {
+    color: '#8FA7B3',
+    fontFamily: 'Nunito_400Regular',
+    fontSize: 12,
+    lineHeight: 22,
+    textAlign: 'right',
   },
 
   label: {
@@ -22,9 +48,13 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
 
+  error: {
+    color: '#FF669D',
+  },
+
   comment: {
-    fontSize: 11,
     color: '#8FA7B3',
+    fontSize: 11,
   },
 
   input: {
@@ -46,20 +76,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 20,
     marginRight: 8,
-    height: 72,
     padding: 1,
+    height: 72,
     borderRadius: 20,
   },
 
   uploadedImageContainer: {
     flex: 1,
-    width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    borderRadius: 20,
     padding: 6,
     paddingRight: 20,
+    width: '100%',
+    borderRadius: 20,
   },
 
   uploadedImageInfoContainer: {
@@ -84,31 +114,28 @@ const styles = StyleSheet.create({
   },
 
   imagesInput: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 32,
+    height: 56,
     backgroundColor: 'rgba(255, 255, 255, 0.5)',
     borderStyle: 'dashed',
     borderColor: '#96D2F0',
     borderWidth: 1.4,
     borderRadius: 20,
-    height: 56,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 32,
-  },
-
-  switchContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    marginTop: 16,
   },
 
   nextButton: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 32,
+    height: 56,
     backgroundColor: '#15C3D6',
     borderRadius: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 56,
-    marginTop: 32,
+  },
+
+  nextButtonDisabled: {
+    backgroundColor: '#15C3D644',
   },
 
   nextButtonText: {
