@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
-import { ScrollView, View, Switch, Text, TouchableOpacity, Image } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { ScrollView, View, Text, TouchableOpacity, Image } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { BorderlessButton, RectButton } from 'react-native-gesture-handler';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import * as ImagePicker from 'expo-image-picker';
 import { LinearGradient } from 'expo-linear-gradient';
 
-import api from '../../../services/api';
 import useForm from '../../../hooks/useForm';
 
 import Input from '../../../components/Input';
@@ -20,7 +19,7 @@ interface OrphanageDataRouteParams {
   }
 }
 
-interface ImageProps {
+export interface ImageProps {
   name: string;
   uri: string;
 }
@@ -33,51 +32,39 @@ function OrphanageData() {
     name: '',
     about: '',
     whatsapp: '',
-    openFrom: '',
-    openUntil: '',
-    instructions: '',
   }
   
-  const [form, updateField] = useForm(initialFields);
-  const [openOnWeekends, setOpenOnWeekends] = useState(false);
-  const [countImages, setCountImages] = useState(0);
+  const [
+    form, errors,
+    updateField, validateFields,
+    hasOneFieldEmpty,
+  ] = useForm(initialFields);
+
+  const [buttonNextDisabled, setButtonNextDisabled] = useState(true);
 
   const [images, setImages] = useState<ImageProps[]>([]);
+  const [errorImages, setErrorImages] = useState(false);
+
+  const [countImages, setCountImages] = useState(0);
 
   const route = useRoute();
   const params = route.params as OrphanageDataRouteParams;
-  
-  function addValueInTime(field: string, newValue: string) {
-    newValue = newValue.trim();
-    
-    if (!newValue.includes(':')) {
-      if (newValue.length === 2) {
-        newValue = newValue + ':';
+
+  useEffect(() => {
+    if (hasOneFieldEmpty() || images.length === 0) {
+      if (images.length > 0) {
+        setErrorImages(false);
       }
       
-      else if (newValue.length === 5) {
-        newValue = newValue.slice(0, 2) + ':' + newValue.slice(3, 5);
-      }
+      setButtonNextDisabled(true);
     }
-    
+
     else {
-      if (newValue.length === 5) {
-        const array = newValue.split(':').map((value) => parseInt(value));
-        
-        if (isNaN(array[0]) || isNaN(array[1])) {
-          newValue = '00:00';
-        }
-        
-        else if ((array[0] > 23 || array[0] < 0)
-        || (array[1] > 59 || array[1] < 0)) {
-          newValue = '00:00';
-        }
-      }
+      setButtonNextDisabled(false);
+      setErrorImages(false);
     }
-    
-    updateField(field, newValue);
-  }
-  
+  }, [form, images]);
+
   function addNumber(field: string, newValue: string) {
     const regex = /^[0-9]+$/;
     
@@ -115,86 +102,98 @@ function OrphanageData() {
     if (result.cancelled) {
       return;
     }
-
+    
     const numberImage = countImages + 1 > 9 ? countImages + 1 : `0${countImages + 1}`;
     
     const image = {
       uri: result.uri,
       name: `imagem-${numberImage}.jpg`,
     };
-
+    
     setImages([...images, image]);
     setCountImages(countImages + 1);
   }
   
-  function handleCreateOrphanage() {
+  function handleNextStep() {
+    validateFields();
+
+    if (hasOneFieldEmpty() || images.length === 0) {
+      if (images.length === 0) {
+        setErrorImages(true);
+      }
+
+      return;
+    }
+
     const { latitude, longitude } = params.position;
 
-    const data = new FormData();
-
-    data.append('name', form.name);
-    data.append('about', form.about);
-    data.append('whatsapp', form.whatsapp);
-    data.append('latitude', String(latitude));
-    data.append('longitude', String(longitude));
-    data.append('instructions', form.instructions);
-    data.append('open_from', form.openFrom);
-    data.append('open_until', form.openUntil);
-    data.append('open_on_weekends', String(openOnWeekends));
-    
-    images.forEach((image) => {
-      data.append('images', {
-        name: image.name,
-        uri: image.uri,
-        type: 'image/jpg',
-      } as any);
+    navigate('OrphanageVisitation', {
+      name: form.name,
+      about: form.about,
+      whatsapp: form.whatsapp,
+      images,
+      latitude,
+      longitude
     });
-
-    api.post('/orphanages', data)
-      .then(() => {
-        navigate('Success', {
-          title: 'Ebaaa!',
-          description: 'O cadastro deu certo e foi enviado ao administrador para ser aprovado. Agora é só esperar :)',
-          textButton: 'Ok',
-          routeButton: 'OrphanagesMap',
-        });
-      });
   }
 
   return (
     <ScrollView style={styles.container} contentContainerStyle={{ padding: 24 }}>
-      <Text style={styles.title}>Dados</Text>
+      <View style={styles.titleContainer}>
+        <Text style={styles.title}>Dados</Text>
+        <View style={styles.paginationContainer}>
+          <Text style={styles.pageEnabled}>
+            01
+          </Text>
+          <Text style={styles.pageDisabled}>
+            {' - '}
+          </Text>
+          <Text style={styles.pageDisabled}>
+            02
+          </Text>
+        </View>
+      </View>
 
       <Input 
         label="Nome"
         value={form.name}
         onChangeText={(value) => updateField('name', value)}
+        labelError="Nome não informado"
+        error={errors.name}
       />
 
       <Input 
         label="Sobre"
-        comment="Máximo de 500 caracteres"
         value={form.about}
         onChangeText={(value) => updateField('about', value)}
+        labelError="Informações sobre o orfanato não informadas"
+        error={errors.about}
+        comment="Máximo de 500 caracteres"
         multiline
         maxLength={500}
         style={{ height: 110 }}
       />
 
       <Input 
-        label="Número de Whatsapp"
-        placeholder="Ex: 5585992820129"
+        label="Número do Whatsapp"
         value={form.whatsapp}
         onChangeText={(value) => addNumber('whatsapp', value)}
+        labelError="Número do Whatsapp não informado"
+        error={errors.whatsapp}
+        placeholder="Ex: 5585992820129"
         keyboardType="numeric"
       />
 
-      <Text style={styles.label}>Fotos</Text>
+      <Text style={!errorImages ? [styles.label] : [styles.label, styles.error]}>
+        {!errorImages ? 'Fotos'
+          : 'Fotos não fornecidas'
+        }
+      </Text>
 
       {images.map((image, index) => {
         return (
           <LinearGradient
-            key={image.uri} 
+            key={image.uri}
             style={styles.uploadedImageContainerBorder}
             colors={['#A1E9C5', '#FFC2D8']}
             start={[0.6, 0.6]}
@@ -227,45 +226,22 @@ function OrphanageData() {
         <Feather name="plus" size={24} color="#15B6D6" />
       </TouchableOpacity>
 
-      <Text style={styles.title}>Visitas</Text>
-
-      <Input 
-        label="Horário de abertura"
-        value={form.openFrom}
-        onChangeText={(value) => addValueInTime('openFrom', value)}
-        keyboardType="numeric"
-        maxLength={5}
-      />
-
-      <Input 
-        label="Horário de fechamento"
-        value={form.openUntil}
-        onChangeText={(value) => addValueInTime('openUntil', value)}
-        keyboardType="numeric"
-        maxLength={5}
-      />
-
-      <Input 
-        label="Instruções"
-        value={form.instructions}
-        onChangeText={(value) => updateField('instructions', value)}
-        multiline
-        style={{ height: 110 }}
-      />
-
-      <View style={styles.switchContainer}>
-        <Text style={styles.label}>Atende final de semana?</Text>
-        <Switch 
-          thumbColor="#FFF" 
-          trackColor={{ false: '#CCC', true: '#39CC83' }}
-          value={openOnWeekends}
-          onValueChange={setOpenOnWeekends}
-        />
-      </View>
-
-      <RectButton style={styles.nextButton} onPress={handleCreateOrphanage}>
-        <Text style={styles.nextButtonText}>Cadastrar</Text>
-      </RectButton>
+      {buttonNextDisabled ? (
+        <TouchableOpacity
+          style={[
+            styles.nextButton, styles.nextButtonDisabled
+          ]}
+          disabled={buttonNextDisabled}
+        >
+          <Text style={styles.nextButtonText}>
+            Próximo
+          </Text>
+        </TouchableOpacity>
+      ) : (
+        <RectButton style={styles.nextButton} onPress={handleNextStep}>
+          <Text style={styles.nextButtonText}>Próximo</Text>
+        </RectButton>
+      )}
     </ScrollView>
   );
 }
