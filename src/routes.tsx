@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { AsyncStorage } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -8,6 +8,7 @@ import OrphanagesMap from './pages/OrphanagesMap';
 import OrphanageDetails from './pages/OrphanageDetails';
 import SelectMapPosition from './pages/CreateOrphanage/SelectMapPosition';
 import OrphanageData from './pages/CreateOrphanage/OrphanageData';
+import OrphanageVisitation from './pages/CreateOrphanage/OrphanageVisitation';
 import OnboardingPage from './pages/OnboardingPage';
 import Success from './pages/Success';
 import Cancel from './pages/Cancel';
@@ -77,6 +78,14 @@ function Routes() {
           <Screen 
             name="OrphanageData"
             component={OrphanageData}
+            options={{
+              headerShown: true,
+              header: () => <Header title="Informe os dados" />
+            }}
+          />
+          <Screen 
+            name="OrphanageVisitation"
+            component={OrphanageVisitation}
             options={{
               headerShown: true,
               header: () => <Header title="Informe os dados" />
