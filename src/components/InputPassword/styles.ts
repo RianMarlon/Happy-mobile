@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
   inputContainer: {
     position: 'relative',
     height: 56,
+    marginBottom: 16,
   },
 
   input: {
@@ -35,10 +36,10 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#D3E2E5',
     borderRadius: 20,
+    height: 56,
     paddingVertical: 18,
     paddingHorizontal: 24,
     paddingRight: 60,
-    marginBottom: 16,
     textAlignVertical: 'top',
   },
 
