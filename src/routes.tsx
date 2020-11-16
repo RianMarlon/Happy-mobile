@@ -4,12 +4,13 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import Header from './components/Header';
+import OnboardingPage from './pages/OnboardingPage';
+import Login from './pages/Login';
 import OrphanagesMap from './pages/OrphanagesMap';
 import OrphanageDetails from './pages/OrphanageDetails';
 import SelectMapPosition from './pages/CreateOrphanage/SelectMapPosition';
 import OrphanageData from './pages/CreateOrphanage/OrphanageData';
 import OrphanageVisitation from './pages/CreateOrphanage/OrphanageVisitation';
-import OnboardingPage from './pages/OnboardingPage';
 import Success from './pages/Success';
 import Cancel from './pages/Cancel';
 
@@ -49,14 +50,18 @@ function Routes() {
         }}>
           {
             isFirstLaunch && (
-              <Screen 
-                name="Onboarding" 
+              <Screen
+                name="Onboarding"
                 component={OnboardingPage}
               />
             )
           }
-          <Screen 
-            name="OrphanagesMap" 
+          <Screen
+            name="Login"
+            component={Login}
+          />
+          <Screen
+            name="OrphanagesMap"
             component={OrphanagesMap}
           />
           <Screen
@@ -75,7 +80,7 @@ function Routes() {
               header: () => <Header title="Selecione no mapa" />
             }}
           />
-          <Screen 
+          <Screen
             name="OrphanageData"
             component={OrphanageData}
             options={{
@@ -83,7 +88,7 @@ function Routes() {
               header: () => <Header title="Informe os dados" />
             }}
           />
-          <Screen 
+          <Screen
             name="OrphanageVisitation"
             component={OrphanageVisitation}
             options={{
@@ -91,12 +96,12 @@ function Routes() {
               header: () => <Header title="Informe os dados" />
             }}
           />
-          <Screen 
-            name="Success" 
+          <Screen
+            name="Success"
             component={Success}
           />
-          <Screen 
-            name="Cancel" 
+          <Screen
+            name="Cancel"
             component={Cancel}
           />
         </Navigator>
