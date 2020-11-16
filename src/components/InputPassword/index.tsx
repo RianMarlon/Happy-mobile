@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Image, TextInput, StyleSheet } from 'react-native';
+import { View, Text, Image, TextInput, StyleSheet, TextStyle } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { InputProps } from '../Input';
 
@@ -14,7 +14,7 @@ function InputPassword({
     label, labelError, error, ...rest
   }: InputPasswordProps) {
 
-  const [stylesInput, setStylesInput] = useState([styles.input, rest.style]);
+  const [stylesInput, setStylesInput] = useState<TextStyle[]>([styles.input]);
   const [showPassword, setShowPassword] = useState(false);
 
   const styleLabel = StyleSheet.create({
@@ -25,15 +25,15 @@ function InputPassword({
 
   useEffect(() => {
     if (rest.value && rest.value.trim()) {
-      setStylesInput([styles.input, rest.style, styles.noEmpty]);
+      setStylesInput([styles.input, styles.noEmpty]);
     }
 
     else if (error) {
-      setStylesInput([styles.input, rest.style, styles.inputError]);
+      setStylesInput([styles.input, styles.inputError]);
     }
     
     else {
-      setStylesInput([styles.input, rest.style]);
+      setStylesInput([styles.input]);
     }
   }, [rest.value, error]);
 
@@ -50,7 +50,7 @@ function InputPassword({
         </Text>
       </View>
 
-      <View style={styles.inputContainer}>
+      <View style={[styles.inputContainer, rest.style]}>
         <TextInput
           { ...rest }
           style={error

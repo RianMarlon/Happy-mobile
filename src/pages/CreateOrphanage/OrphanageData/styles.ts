@@ -116,7 +116,6 @@ const styles = StyleSheet.create({
   imagesInput: {
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 32,
     height: 56,
     backgroundColor: 'rgba(255, 255, 255, 0.5)',
     borderStyle: 'dashed',
@@ -128,7 +127,7 @@ const styles = StyleSheet.create({
   nextButton: {
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 32,
+    marginTop: 42,
     height: 56,
     backgroundColor: '#15C3D6',
     borderRadius: 20,
