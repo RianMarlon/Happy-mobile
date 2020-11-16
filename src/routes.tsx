@@ -6,6 +6,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Header from './components/Header';
 import OnboardingPage from './pages/OnboardingPage';
 import Login from './pages/Login';
+import WhoAreYou from './pages/Register/WhoAreYou';
 import OrphanagesMap from './pages/OrphanagesMap';
 import OrphanageDetails from './pages/OrphanageDetails';
 import SelectMapPosition from './pages/CreateOrphanage/SelectMapPosition';
@@ -59,6 +60,10 @@ function Routes() {
           <Screen
             name="Login"
             component={Login}
+          />
+          <Screen
+            name="WhoAreYou"
+            component={WhoAreYou}
           />
           <Screen
             name="OrphanagesMap"
