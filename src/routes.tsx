@@ -7,6 +7,7 @@ import Header from './components/Header';
 import OnboardingPage from './pages/OnboardingPage';
 import Login from './pages/Login';
 import WhoAreYou from './pages/Register/WhoAreYou';
+import EmailAndPassword from './pages/Register/EmailAndPassword';
 import OrphanagesMap from './pages/OrphanagesMap';
 import OrphanageDetails from './pages/OrphanageDetails';
 import SelectMapPosition from './pages/CreateOrphanage/SelectMapPosition';
@@ -64,6 +65,10 @@ function Routes() {
           <Screen
             name="WhoAreYou"
             component={WhoAreYou}
+          />
+          <Screen
+            name="EmailAndPassword"
+            component={EmailAndPassword}
           />
           <Screen
             name="OrphanagesMap"
