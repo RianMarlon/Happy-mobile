@@ -57,14 +57,14 @@ function OnboardingPage() {
           NextButtonComponent={NextButton}
           DoneButtonComponent={DoneButton}
           DotComponent={Square}
-          onDone={() => navigate("OrphanagesMap")}
+          onDone={() => navigate("Login")}
           bottomBarColor="#CEDEE5"
           controlStatusBar={false}
           pages={[
             {
               backgroundColor: "#CEDEE5",
               image: (
-                <Image source={worldHappyImg} width={257} height={279} />
+                <Image source={worldHappyImg} />
               ),
               title: (
                 <Text style={styles.titleWorldHappy}>
@@ -80,7 +80,7 @@ function OnboardingPage() {
             {
               backgroundColor: "#CEDEE5",
               image: (
-                <Image source={kidsHappyImg} width={295} height={427} />
+                <Image source={kidsHappyImg} />
               ),
               title: (
                 <Text style={styles.titleKidsHappy}>
