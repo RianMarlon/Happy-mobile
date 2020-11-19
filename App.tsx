@@ -5,7 +5,7 @@ import { Nunito_400Regular, Nunito_600SemiBold, Nunito_700Bold, Nunito_800ExtraB
 
 import { RootSiblingParent } from 'react-native-root-siblings';
 
-import Routes from './src/routes';
+import Routes from './src/routes/Routes';
 
 export default function App() {
 
