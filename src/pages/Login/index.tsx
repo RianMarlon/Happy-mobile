@@ -1,25 +1,28 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { View, Text, ScrollView, Image } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/native';
 import { RectButton, TouchableOpacity } from 'react-native-gesture-handler';
 import Toast from 'react-native-root-toast';
 
 import api from '../../services/api';
 import { TOKEN_KEY } from '../../services/auth';
 
+import AuthContext from '../../contexts/AuthContext';
+
 import useForm from '../../hooks/useForm';
 
 import Input from '../../components/Input';
+import InputPassword from '../../components/InputPassword';
 import Logo from '../../components/Logo';
 
 import checkImg from '../../assets/images/check.png';
 
 import styles from './styles';
-import InputPassword from '../../components/InputPassword';
-import { useNavigation } from '@react-navigation/native';
 
 function Login() {
 
+  const { checkToken } = useContext(AuthContext)
   const { navigate } = useNavigation();
 
   const initialFields = {
@@ -31,7 +34,7 @@ function Login() {
   const [
     form, errors,
     updateField, validateFields,
-    hasOneFieldEmpty, resetFields,
+    hasOneFieldEmpty,
   ] = useForm(initialFields);
   
   const [buttonSubmitDisabled, setButtonSubmitDisabled] = useState(true);
@@ -76,11 +79,10 @@ function Login() {
 
     api.post('/signin', data)
       .then(async (response) => {
-        resetFields();
-
         const { token } = response.data;
 
         await AsyncStorage.setItem(TOKEN_KEY, token);
+        await checkToken();
       })
       .catch(({ response }) => {
         const data = response.data;

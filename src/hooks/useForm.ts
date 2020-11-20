@@ -33,22 +33,10 @@ function useForm(initialState: any) {
     return Object.values(form).some(hasFieldEmpty);
   }
 
-  function resetFields(obj: any) {
-    const newErrors: any = {};
-    
-    Object.entries(form).forEach(([field, value]) => {
-      newErrors[field] = '';
-    });
-    
-    setForm({
-      ...newErrors
-    });
-  }
-
   return [
     form, errors,
     updateField, validateFields,
-    hasOneFieldEmpty, resetFields,
+    hasOneFieldEmpty,
   ]
 }
 
