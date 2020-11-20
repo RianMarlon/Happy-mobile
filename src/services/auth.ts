@@ -28,14 +28,18 @@ export const hasTokenValid = async () => {
       token: tokenAsyncStorage,
     }
 
-    const response = await api.post('/validate-token', data);
-    const { isTokenValid } = response.data;
-
-    if (!isTokenValid) {
-      AsyncStorage.removeItem(TOKEN_KEY);
+    try {
+      const response = await api.post('/validate-token', data);
+      const { is_valid_token: isValidToken } = response.data;
+  
+      return isValidToken;
     }
 
-    return isTokenValid;
+    catch(err) {
+      await AsyncStorage.removeItem(TOKEN_KEY);
+
+      return false;
+    }
   }
 
   else {
