@@ -5,6 +5,18 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 
+  offButton: {
+    position: 'absolute',
+    top: 50,
+    right: 24,
+    height: 40,
+    width: 40,
+    borderRadius: 12,
+    backgroundColor: '#12AFCB99',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
   map: {
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height,
