@@ -1,14 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text } from 'react-native';
+import React, { useContext, useEffect, useState } from 'react';
+import { View, Text, Image } from 'react-native';
 import MapView, { Marker, Callout, PROVIDER_GOOGLE } from 'react-native-maps';
 import { Feather } from '@expo/vector-icons';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { RectButton } from 'react-native-gesture-handler';
 import * as Location from 'expo-location';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import api from '../../services/api';
+import { TOKEN_KEY } from '../../services/auth';
+import AuthContext from '../../contexts/AuthContext';
 
 import mapMarkerImg from '../../assets/images/map-marker.png';
+import offImg from '../../assets/images/off.png';
 
 import styles from './styles';
 
@@ -26,6 +30,8 @@ interface MyLocation {
 
 function OrphanagesMap() {
 
+  const { checkToken } = useContext(AuthContext);
+
   const [myLocation, setMyLocation] = useState<MyLocation>({
     latitude: -5.1069647,
     longitude: -38.3761372
@@ -39,7 +45,7 @@ function OrphanagesMap() {
     React.useCallback(() => {
       api.get('/orphanages')
         .then((response) => {
-          setOrphanages(response.data);  
+          setOrphanages(response.data);
         });
     }, [])
   );
@@ -63,6 +69,11 @@ function OrphanagesMap() {
     })();
   }, [])
 
+  async function handleRemoveToken() {
+    await AsyncStorage.removeItem(TOKEN_KEY);
+    await checkToken();
+  }
+
   function handleNavigateToOrphanageDetails(id: number) {
     navigate('OrphanageDetails', { id });
   }
@@ -73,7 +84,7 @@ function OrphanagesMap() {
 
   return (
     <View style={styles.container}>
-      <MapView 
+      <MapView
         style={styles.map}
         provider={PROVIDER_GOOGLE}
         region={{
@@ -111,7 +122,9 @@ function OrphanagesMap() {
           )
         })}
       </MapView>
-
+      <RectButton style={styles.offButton} onPress={handleRemoveToken}>
+        <Image source={offImg} style={{ height: 20, width: 20 }} />
+      </RectButton>
       <View style={styles.footer}>
           <Text style={styles.footerText}>
             {orphanages.length > 1 
