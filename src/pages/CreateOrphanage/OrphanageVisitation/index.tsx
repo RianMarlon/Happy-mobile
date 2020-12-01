@@ -195,7 +195,9 @@ function OrphanageVisitation() {
         onChangeText={(value) => updateField('instructions', value)}
         labelError="Instruções sobre a visita não informadas"
         error={errors.instructions}
+        comment="Máximo de 500 caracteres"
         multiline
+        maxLength={500}
         style={{ height: 110 }}
       />
 
