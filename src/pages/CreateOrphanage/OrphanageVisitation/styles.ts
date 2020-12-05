@@ -47,11 +47,17 @@ const styles = StyleSheet.create({
     fontFamily: 'Nunito_600SemiBold',
     fontSize: 14,
   },
-  
-  openOnWeekendsButtonsContainer: {
-    height: 56,
+
+  openingHoursContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  
+  openOnWeekendsButtonsContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    height: 56,
   },
 
   openOnWeekendsButton: {
