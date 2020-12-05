@@ -67,7 +67,7 @@ function OrphanagesMap() {
         longitude: coords.longitude
       });
     })();
-  }, [])
+  }, []);
 
   async function handleRemoveToken() {
     await AsyncStorage.removeItem(TOKEN_KEY);

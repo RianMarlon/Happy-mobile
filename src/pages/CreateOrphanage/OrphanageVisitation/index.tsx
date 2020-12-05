@@ -169,25 +169,6 @@ function OrphanageVisitation() {
         </View>
       </View>
 
-      <Input
-        label="Horário de abertura"
-        value={form.openFrom}
-        onChangeText={(value) => addValueInTime('openFrom', value)}
-        labelError="Horário de abertura não informado"
-        error={errors.openFrom}
-        keyboardType="numeric"
-        maxLength={5}
-      />
-
-      <Input
-        label="Horário de fechamento"
-        value={form.openUntil}
-        onChangeText={(value) => addValueInTime('openUntil', value)}
-        labelError="Horário de fechamento não informado"
-        error={errors.openUntil}
-        keyboardType="numeric"
-        maxLength={5}
-      />
 
       <Input
         label="Instruções"
@@ -200,6 +181,31 @@ function OrphanageVisitation() {
         maxLength={500}
         style={{ height: 110 }}
       />
+      
+      <View style={styles.openingHoursContainer}>
+
+        <Input
+          label="Das"
+          value={form.openFrom}
+          onChangeText={(value) => addValueInTime('openFrom', value)}
+          labelError="Horário não informado"
+          error={errors.openFrom}
+          keyboardType="numeric"
+          maxLength={5}
+          style={{ width: 90 }}
+        />
+
+        <Input
+          label="Até"
+          value={form.openUntil}
+          onChangeText={(value) => addValueInTime('openUntil', value)}
+          labelError="Horário não informado"
+          error={errors.openUntil}
+          keyboardType="numeric"
+          maxLength={5}
+          style={{ width: 90 }}
+        />
+      </View>
 
       <Text style={styles.label}>Atende final de semana?</Text>
 
